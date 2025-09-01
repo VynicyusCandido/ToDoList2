@@ -26,7 +26,7 @@ pids
 *.pid.lock
 
 # Diretório de coverage
-coverage/
+
 *.lcov
 
 # Diretórios de build
@@ -92,3 +92,4 @@ Thumbs.db
 sonarqube/extensions
 sonarqube/data
 sonarqube/logs
+coverage/
