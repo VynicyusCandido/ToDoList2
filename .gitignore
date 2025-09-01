@@ -26,7 +26,7 @@ pids
 *.pid.lock
 
 # Diretório de coverage
-coverage/
+
 *.lcov
 
 # Diretórios de build
@@ -87,3 +87,9 @@ Thumbs.db
 
 # DynamoDB Local files
 .dynamodb/
+
+.scannerwork
+sonarqube/extensions
+sonarqube/data
+sonarqube/logs
+coverage/
