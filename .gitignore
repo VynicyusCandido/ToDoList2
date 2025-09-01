@@ -87,3 +87,8 @@ Thumbs.db
 
 # DynamoDB Local files
 .dynamodb/
+
+.scannerwork
+sonarqube/extensions
+sonarqube/data
+sonarqube/logs
