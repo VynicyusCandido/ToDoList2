@@ -1,11 +1,39 @@
-- name: SonarCloud Scan
-  uses: SonarSource/sonarqube-scan-action@v5
-  env:
-    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    SONAR_HOST_URL: http://localhost:9000
-  with:
-    args: >
-      -Dsonar.projectKey=ToDoList
-      -Dsonar.organization=VynicyusCandido
-      -Dsonar.sources=src
-      -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+name: Build and SonarQube Analysis
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-analyze:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests with coverage
+      run: npm test -- --coverage
+
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v5
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: https://sonarcloud.io  # Corrigido para SonarCloud
+      with:
+        args: >
+          -Dsonar.projectKey=ToDoList
+          -Dsonar.organization=VynicyusCandido
+          -Dsonar.sources=src
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
